@@ -10,7 +10,7 @@ suppressPackageStartupMessages({
 })
 
 # ---- Base folders ----
-base_dir      <- "~/CESC_Network/6_OCTAD/6_5_Validation"
+base_dir      <- "~/OCTAD_Cervical_Cancer/5_Validation"
 base_dir_A7   <- file.path(base_dir, "Validation_A7")
 base_dir_A9   <- file.path(base_dir, "Validation_A9")
 plots_out_dir <- file.path(base_dir, "Plots"); dir.create(plots_out_dir, TRUE, FALSE)
@@ -159,8 +159,8 @@ collect_octad_metrics <- function(base_clade_dir){
 }
 
 # --- FDA highlight lists (Launched) ---
-RGEs_A7 <- readRDS("~/CESC_Network/6_OCTAD/6_3_RES/A7/RES_A7_common3_collapsed_FDA_Launched.rds")
-RGEs_A9 <- readRDS("~/CESC_Network/6_OCTAD/6_3_RES/A9/RES_A9_common3_collapsed_FDA_Launched.rds")
+RGEs_A7 <- readRDS("~/OCTAD_Cervical_Cancer/3_RES/A7/RES_A7_common3_collapsed_FDA_Launched.rds")
+RGEs_A9 <- readRDS("~/OCTAD_Cervical_Cancer/3_RES/A9/RES_A9_common3_collapsed_FDA_Launched.rds")
 fda_set_A7 <- tolower(trimws(RGEs_A7$pert_iname))
 fda_set_A9 <- tolower(trimws(RGEs_A9$pert_iname))
 
@@ -323,7 +323,7 @@ plot_global_ic50 <- function(tbl, title_prefix){
     geom_smooth(aes(group = 1), method = "lm", se = TRUE,
                 color = "black", fill = "grey80") +
     annotate("text", x = -Inf, y = Inf, label = lab,
-             hjust = -0.05, vjust = 1.1, size = 3.1) +
+             hjust = -0.05, vjust = 1.1, size = 5.1) +
     scale_shape_manual(values = c(FDA = 17, Other = 16),
                        name   = "FDA status",
                        labels = c(FDA = "Launched", Other = "Other")) +
@@ -332,7 +332,10 @@ plot_global_ic50 <- function(tbl, title_prefix){
     coord_cartesian(ylim = range(dd$y, na.rm = TRUE),
                     xlim = range(dd$sRGES, na.rm = TRUE),
                     clip = "off") +
-    theme_minimal(base_size = 16)
+    theme_minimal(base_size = 20) +
+    theme(axis.text = element_text(size = 16),
+          axis.title = element_text(size = 18),
+          plot.title = element_text(size = 20, face = "bold"))
 }
 
 # ---- Plotters (globals with collapsed data + Pearson of collapsed points + LM line) ----
@@ -348,7 +351,7 @@ plot_global_auc <- function(tbl, title_prefix){
     geom_smooth(aes(group = 1), method = "lm", se = TRUE,
                 color = "black", fill = "grey80") +
     annotate("text", x = -Inf, y = Inf, label = lab,
-             hjust = -0.05, vjust = 1.1, size = 3.1) +
+             hjust = -0.05, vjust = 1.1, size = 5.1) +
     scale_shape_manual(values = c(FDA = 17, Other = 16),
                        name   = "FDA status",
                        labels = c(FDA = "Launched", Other = "Other")) +
@@ -359,7 +362,10 @@ plot_global_auc <- function(tbl, title_prefix){
     coord_cartesian(ylim = range(dd$y, na.rm = TRUE),
                     xlim = range(dd$sRGES, na.rm = TRUE),
                     clip = "off") +
-    theme_minimal(base_size = 16)
+    theme_minimal(base_size = 20) +
+    theme(axis.text = element_text(size = 16),
+          axis.title = element_text(size = 18),
+          plot.title = element_text(size = 20, face = "bold"))
 }
 
 # ---- Build plots ----
