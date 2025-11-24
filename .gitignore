@@ -12,8 +12,8 @@
 # (Optional) Allow bash and markdown scripts
 !*.sh
 #!*.md
-!*.png
-!*.pdf
+#!*.png
+#!*.pdf
 # (Optional) Allow specific folders
 #!docs/
 #!config/
